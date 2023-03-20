@@ -1,0 +1,16 @@
+{% extends 'ziralist/base.html' %}
+{% load static %}
+{% block title %} Удаление статуса {% endblock title %}
+{% block css_link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/create_form.css' %}" />
+{% endblock css_link %}
+{% block content %}
+    <h1>Удалить статус '{{ status.name }}'</h1>
+    <div class="form-div">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="update-button delete-button" type="submit" value="Удалить статус">
+    </form>
+    </div>
+{% endblock content %}

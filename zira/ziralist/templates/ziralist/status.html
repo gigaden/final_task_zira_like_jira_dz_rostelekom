@@ -1,0 +1,33 @@
+{% extends 'ziralist/base.html' %}
+{% block title %} Список статусов {% endblock title %}
+{% block content %}
+<div class="main-project-container">
+    {% if user.is_authenticated %}
+    <h1>Все статусы. Всего: {{ status|length }}</h1>
+    {% if status %}
+    {% for stat in status%}
+    <div class="project-container">
+        <ul>
+            <li><h2>название статуса: {{ stat.name }}</h2></li>
+            <li>автор: {{ stat.author }}</li>
+            <li>дата создания: {{ stat.create_date }}</li>
+            <li><a href="{% url 'status_update' stat.pk %}">редактировать статус</a></li>
+            <li><a href="{% url 'status_delete' stat.pk %}">удалить статус</a></li>
+            <li><a href="{% url 'move_status_down' stat.pk %}">переместить вниз</a></li>
+            <li><a href="{% url 'move_status_up' stat.pk %}">переместить вверх</a></li>
+        </ul>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>У вас не создано ни одного статуса, либо нет проектов</p>
+    <p><a href="{% url 'status_create' %}">создайте новый статус</a>, или
+        <a href="{% url 'project_create' %}">создайте новый проект</a>, если проектов нет и дефолтные статусы
+        сгенерируются автоматически
+    </p>
+    {% endif %}
+    {% else %}
+    <p>Контент доступен только для авторизованных пользователей</p>
+    <p>Пожалуйста <a class="update-button" href="{% url 'login' %}">войдите, или зарегистрируйтесь</a></p>
+    {% endif %}
+</div>
+{% endblock content %}

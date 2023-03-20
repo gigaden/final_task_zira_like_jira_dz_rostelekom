@@ -1,0 +1,31 @@
+<ul class="navbar">
+  <li>
+    <a class="update-button" href="{% url 'index'%}">Главная</a>
+  </li>
+  {% if request.user.is_authenticated %}
+  <li>
+    <a href="{% url 'project_create' %}">Создать проект</a>
+  </li>
+  <li>
+    <a href="{% url 'user_task' request.user.id %}">Мои задачи</a>
+  <li>
+    <a href="{% url 'task_create' %}">Создать задачу</a>
+  </li>
+  <li>
+    <a href="{% url 'sprint_create' %}">Создать спринт</a>
+  </li>
+  <li>
+    <a href="{% url 'status' %}">Статусы задач</a>
+  </li>
+  <li>
+    Привет, {{ user.username }}! | <a class="update-button" href="{% url 'logout' %}">Выйти</a>
+  </li>
+  {% else %}
+  <li>
+    <a class="update-button" href="{% url 'register' %}">Регистрация</a> |
+  </li>
+  <li>
+    <a class="update-button" href="{% url 'login' %}">Войти</a>
+  </li>
+  {% endif %}
+</ul>

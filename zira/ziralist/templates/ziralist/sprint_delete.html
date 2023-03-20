@@ -1,0 +1,17 @@
+{% extends 'ziralist/base.html' %}
+{% load static %}
+{% block title %} Удаление спринта {% endblock title %}
+{% block css_link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/create_form.css' %}" />
+{% endblock css_link %}
+{% block content %}
+    <h1>Удалить спринт '{{ sprint.name }}'</h1>
+    <p>Задачи удалены не будут, спринт у них будет сброшен</p>
+    <div class="form-div">
+    <form action="" method="post">
+        {% csrf_token %}
+        {{ form }}
+        <input class="update-button delete-button" type="submit" value="Удалить спринт">
+    </form>
+    </div>
+{% endblock content %}

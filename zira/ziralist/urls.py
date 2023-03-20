@@ -1,0 +1,58 @@
+from django.urls import path
+from .views import (
+    AllProjectView,
+    project_view,
+    TaskUpdateView,
+    LoginUser,
+    RegisterUser,
+    logout_user,
+    move_task_forward,
+    move_task_back,
+    sprint_task_view,
+    ProjectCreateView,
+    ProjectDeleteView,
+    TaskCreateView,
+    ProjectUpdateView,
+    TaskDeleteView,
+    user_task_view,
+    SprintCreateView,
+    SprintDeleteView,
+    SprintUpdateView,
+    AllStatusView,
+    StatusCreateView,
+    StatusDeleteView,
+    StatusUpdateView,
+    move_status_down,
+    move_status_up,
+)
+
+urlpatterns = [
+    path("", AllProjectView.as_view(), name="index"),
+    path("project/<int:pk>/", project_view, name="project"),
+    path("project_create/", ProjectCreateView.as_view(), name="project_create"),
+    path(
+        "project_update/<int:pk>/", ProjectUpdateView.as_view(), name="project_update"
+    ),
+    path(
+        "project_delete/<int:pk>/", ProjectDeleteView.as_view(), name="project_delete"
+    ),
+    path("task_create/", TaskCreateView.as_view(), name="task_create"),
+    path("task_delete/<int:pk>/", TaskDeleteView.as_view(), name="task_delete"),
+    path("user_task/<int:pk>/", user_task_view, name="user_task"),
+    path("move_task_forward/<int:pk>/", move_task_forward, name="move_task_forward"),
+    path("move_task_back/<int:pk>/", move_task_back, name="move_task_back"),
+    path("sprint/<int:pk>/", sprint_task_view, name="sprint"),
+    path("sprint_create/", SprintCreateView.as_view(), name="sprint_create"),
+    path("sprint_delete/<int:pk>/", SprintDeleteView.as_view(), name="sprint_delete"),
+    path("sprint_update/<int:pk>/", SprintUpdateView.as_view(), name="sprint_update"),
+    path("update_task/<int:pk>/", TaskUpdateView.as_view(), name="task_update"),
+    path("status/", AllStatusView.as_view(), name="status"),
+    path("status_create/", StatusCreateView.as_view(), name="status_create"),
+    path("status_delete/<int:pk>/", StatusDeleteView.as_view(), name="status_delete"),
+    path("status_update/<int:pk>/", StatusUpdateView.as_view(), name="status_update"),
+    path("move_status_down/<int:pk>/", move_status_down, name="move_status_down"),
+    path("move_status_up/<int:pk>/", move_status_up, name="move_status_up"),
+    path("login/", LoginUser.as_view(), name="login"),
+    path("register/", RegisterUser.as_view(), name="register"),
+    path("logout/", logout_user, name="logout"),
+]

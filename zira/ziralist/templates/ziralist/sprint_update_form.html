@@ -1,0 +1,11 @@
+{% extends 'ziralist/base.html' %}
+{% block title %} Обновление спринта {% endblock title %}
+{% block content %}
+    <h1>Обновление спринта</h1>
+    <div class="form-div">
+        <form action="" method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <input class="update-button" type="submit" value="Обновить спринт">
+        </form>
+    </div>
+{% endblock content %}

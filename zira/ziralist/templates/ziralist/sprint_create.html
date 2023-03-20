@@ -1,0 +1,15 @@
+{% extends 'ziralist/base.html' %}
+{% load static %}
+{% block title %} Создание нового спринта {% endblock title %}
+{% block css_link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/create_form.css' %}" />
+{% endblock css_link %}
+{% block content %}
+    <h1>Создание нового спринта</h1>
+    <div class="form-div">
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Создать спринт" class="update-button">
+    </form>
+    </div>
+{% endblock content %}

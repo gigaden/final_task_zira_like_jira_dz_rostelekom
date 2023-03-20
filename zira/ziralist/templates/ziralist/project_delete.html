@@ -1,0 +1,17 @@
+{% extends 'ziralist/base.html' %}
+{% load static %}
+{% block title %} Удаление проекта {% endblock title %}
+{% block css_link %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/create_form.css' %}" />
+{% endblock css_link %}
+{% block content %}
+    <h1>Удалить проект</h1>
+    <div class="form-div">
+    <form action="" method="post">
+    <h3>{{ project.name }}</h3>
+        {% csrf_token %}
+        {{ form }}
+        <input class="update-button delete-button" type="submit" value="Удалить проект">
+    </form>
+    </div>
+{% endblock content %}

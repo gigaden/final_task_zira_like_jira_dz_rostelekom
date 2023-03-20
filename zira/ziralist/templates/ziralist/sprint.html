@@ -1,0 +1,35 @@
+{% extends 'ziralist/base.html' %}
+{% block title %} Спринт {{ sprint.name }} {% endblock title %}
+{% block content %}
+    <h1>Все задачи спринта '{{ sprints.name }}'</h1>
+<a href="{% url 'project' sprints.proj.pk %}">Вернуться в проект</a>
+<div class="main-task-container">
+{% for task in tasks %}
+<ul>
+    <li>название задачи: {{ task.name }}</li>
+    <li>автор задачи: {{ task.author }}</li>
+    {% if task.worker == None %}
+    <li>исполнитель не назначен</li>
+    {% else %}
+    <li>назначена на: {{ task.worker }}</li>
+    {% endif %}
+    <li>описание задачи: {{ task.description }}</li>
+    <l>дата создания задачи: {{ task.create_date }}</l>
+    {% if task.finish_date == None %}
+    <li>закончить до: дата не определена</li>
+    {% else %}
+    <li>закончить до: {{ task.finish_date }}</li>
+    {% endif %}
+    {% if task.spr == None %}
+    <li>спринт: не задан</li>
+    {% else %}
+    <li>спринт: {{ task.spr }}</li>
+    {% endif %}
+    <li>статус задачи: {{ task.stat }}</li>
+    <li><a href="/update_task/{{ task.pk }}">Изменить задачу</a></li>
+    <li><a href="/move_task_forward/{{ task.pk }}">Следующий статус</a></li>
+    <li><a href="/move_task_back/{{ task.pk }}">Предыдущий статус</a></li>
+</ul>
+{% endfor %}
+</div>
+{% endblock content %}

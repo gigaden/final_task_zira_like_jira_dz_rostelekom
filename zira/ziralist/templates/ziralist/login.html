@@ -1,0 +1,21 @@
+{% extends 'ziralist/base.html' %}
+{% load static %}
+{% block title %} Авторизация {% endblock title %}
+{% block css_link %}
+    <link rel="stylesheet" type="text/css" href="" />
+{% endblock css_link %}
+{% block content %}
+    <h1>Авторизация</h1>
+    <h3>Нет учётной записи? <a href="{% url 'register' %}">зарегистрируйтесь</a></h3>
+    <div class="form-div">
+    <form method="post">
+        {% csrf_token %}
+        {% for f in form %}
+        <p><label class="form-label" for="{{ f.id_for_label }}">{{ f.label }}: </label>{{ f }}</p>
+        <div class="form-error">{{ f.errors }}</div>
+        {% endfor %}
+        <input type="submit" value="Авторизоваться" class="update-button">
+
+    </form>
+    </div>
+{% endblock content %}

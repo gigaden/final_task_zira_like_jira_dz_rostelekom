@@ -1,0 +1,67 @@
+{% extends 'ziralist/base.html' %}
+{% block title %} Проект '{{ project.name }}' {% endblock title %}
+{% block content %}
+    <h1>Проект '{{ project.name }}'</h1>
+    <h2>{{ project.description }}</h2>
+    <a href="{% url 'task_create' %}">Создать новую задачу</a>
+    <a href="{% url 'project_update' project.pk %}">редактировать проект</a>
+    <a href="{% url 'project_delete' project.pk %}">удалить проект</a>
+    <a href="{% url 'sprint_create' %}">добавить спринт</a>
+
+{% if sprints %}
+<h3>Все спринты проекта. Всего: {{ sprints|length }}</h3>
+{% for sprint in sprints %}
+    <ul>
+        <li>Спринт: {{ sprint.name }}</li>
+        <li>Срок окончания: {{ sprint.finish_date }}</li>
+        {% if sprint.is_completed == False %}
+        <li>Спринт не завершён</li>
+        {% else %}
+        <li>Спринт завершён {{ sprint.complete_date }}</li>
+        {% endif %}
+        <li><a href="/sprint/{{ sprint.pk }}">Все задачи спринта</a></li>
+        <li><a href="/sprint_delete/{{ sprint.pk }}">Удалить спринт</a></li>
+        <li><a href="{% url 'sprint_update' sprint.pk %}">Редактировать спринт</a></li>
+    </ul>
+{% endfor %}
+{% else %}
+<h3>Все спринты проекта</h3>
+<p>не создано ни одного спринта. <a href="{% url 'sprint_create' %}">Добавить?</a></p>
+{% endif %}
+<div class="main-task-container">
+{% if tasks %}
+<h3>Все задачи проекта. Всего: {{ tasks|length }}</h3>
+{% for task in tasks %}
+<ul>
+    <li>название задачи: {{ task.name }}</li>
+    <li>автор задачи: {{ task.author }}</li>
+    {% if task.worker == None %}
+    <li>исполнитель не назначен</li>
+    {% else %}
+    <li>назначена на: {{ task.worker }}</li>
+    {% endif %}
+    <li>описание задачи: {{ task.description }}</li>
+    <l>дата создания задачи: {{ task.create_date }}</l>
+    {% if task.finish_date == None %}
+    <li>закончить до: дата не определена</li>
+    {% else %}
+    <li>закончить до: {{ task.finish_date }}</li>
+    {% endif %}
+    {% if task.spr == None %}
+    <li>спринт: не задан</li>
+    {% else %}
+    <li>спринт: {{ task.spr }}</li>
+    {% endif %}
+    <li>статус задачи: {{ task.stat }}</li>
+    <li><a href="/update_task/{{ task.pk }}">Изменить задачу</a></li>
+    <li><a href="/move_task_forward/{{ task.pk }}">Следующий статус</a></li>
+    <li><a href="/move_task_back/{{ task.pk }}">Предыдущий статус</a></li>
+    <li><a href="{% url 'task_delete' task.pk%}">Удалить задачу</a></li>
+</ul>
+{% endfor %}
+{% else %}
+<h3>Все задачи проекта:</h3>
+<p>не создано ни одной задачи в проекте. <a href="{% url 'task_create' %}">Добавить?</a></p>
+{% endif %}
+</div>
+{% endblock content %}
