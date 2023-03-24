@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "ziralist.apps.ZiralistConfig",
     "rest_framework",
     "django_filters",
+    'django_dbml',
 ]
 
 MIDDLEWARE = [

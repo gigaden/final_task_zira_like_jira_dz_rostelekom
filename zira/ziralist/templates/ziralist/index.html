@@ -1,31 +1,31 @@
 {% extends 'ziralist/base.html' %}
 {% block title %} Список проектов {% endblock title %}
 {% block content %}
-<div class="main-project-container">
 {% if user.is_authenticated %}
     <h1>Все проекты. Всего: {{ projects|length }}</h1>
 {% if projects %}
 <a href="{% url 'project_create' %}">Создать новый проект</a>
 <a href="{% url 'task_create' %}">Создать новую задачу</a>
+<div class="main-project-container">
 {% for project in projects%}
-  <div class="project-container">
-    <ul>
+    <ul class="project">
         <li><h2>название проекта: {{ project.name }}</h2></li>
         <li>автор: {{ project.author }}</li>
         <li>описание: {{ project.description }}</li>
-        <li>дата создания: {{ project.create_date }}</li>
+        <li>создан: {{ project.create_date }}</li>
         {% if project.finish_date == None %}
         <li>закончить до: дата не определена</li>
         {% else %}
         <li>закончить до: {{ project.finish_date }}</li>
         {% endif %}
-        <li><a href='/project/{{ project.pk }}'>перейти в проект</a></li>
-        <li><a href="{% url 'project_update' project.pk %}">редактировать проект</a></li>
-        <li><a href="{% url 'project_delete' project.pk %}">удалить проект</a></li>
-
+        <li class="libutton">
+            <a class="button" href='/project/{{ project.pk }}'>перейти</a>
+            <a class="button" href="{% url 'project_update' project.pk %}">изменить</a>
+            <a class="button" href="{% url 'project_delete' project.pk %}">удалить</a>
+        </li>
     </ul>
-  </div>
 {% endfor %}
+</div>
 {% else %}
 <p>У вас не создано ни одного проекта</p>
 <p><a href="{% url 'project_create' %}">Создайте проект</a>, чтобы добавлять в него задачи</p>
@@ -34,5 +34,4 @@
     <p>Контент доступен только для авторизованных пользователей</p>
     <p>Пожалуйста <a class="update-button" href="{% url 'login' %}">войдите, или зарегистрируйтесь</a></p>
     {% endif %}
-</div>
 {% endblock content %}

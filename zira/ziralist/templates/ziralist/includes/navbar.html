@@ -1,3 +1,4 @@
+<div class="navbar-container">
 <ul class="navbar">
   <li>
     <a class="update-button" href="{% url 'index'%}">Главная</a>
@@ -11,21 +12,24 @@
   <li>
     <a href="{% url 'task_create' %}">Создать задачу</a>
   </li>
-  <li>
-    <a href="{% url 'sprint_create' %}">Создать спринт</a>
-  </li>
+
   <li>
     <a href="{% url 'status' %}">Статусы задач</a>
   </li>
+  </ul>
+  <ul class="navbar">
   <li>
     Привет, {{ user.username }}! | <a class="update-button" href="{% url 'logout' %}">Выйти</a>
   </li>
+  </ul>
   {% else %}
+  <ul class="navbar">
   <li>
     <a class="update-button" href="{% url 'register' %}">Регистрация</a> |
   </li>
   <li>
     <a class="update-button" href="{% url 'login' %}">Войти</a>
   </li>
+  </ul>
   {% endif %}
-</ul>
+</div>

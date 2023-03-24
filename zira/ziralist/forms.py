@@ -14,6 +14,12 @@ class TaskUpdateForm(forms.ModelForm):
 
 
 class TaskCreateForm(forms.ModelForm):
+    # spr = forms.ModelChoiceField(queryset=Sprint.objects.all(), empty_label='hello')
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['spr'].empty_label = 'спринт не выбран'
+
+
     finish_date = forms.DateTimeField(
         label="Завершить до",
         required=False,
@@ -66,7 +72,7 @@ class SprintCreateForm(forms.ModelForm):
 
     class Meta:
         model = Sprint
-        fields = ["name", "description", "finish_date", "proj"]
+        fields = ["name", "description", "finish_date"]
 
 
 class SprintUpdateForm(forms.ModelForm):

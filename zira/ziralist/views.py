@@ -187,19 +187,28 @@ class SprintCreateView(CreateView):
     model = Sprint
     template_name = "ziralist/sprint_create.html"
     success_url = "/"
-    login_url = reverse_lazy("index")
 
     def form_valid(self, form):
         form.instance.author = self.request.user
-        return super().form_valid(form)
+        form.instance.proj = Project.objects.get(pk=self.kwargs['projpk'])
+        super().form_valid(form)
+        return HttpResponseRedirect(
+            reverse_lazy("project", args=[form.instance.proj.pk])
+        )
 
 
 # удаляем спринт
 class SprintDeleteView(DeleteView):
     model = Sprint
-    success_url = "/"
     template_name = "ziralist/sprint_delete.html"
     context_object_name = "sprint"
+    success_url = "/"
+
+    def form_valid(self, form):
+        super().form_valid(form)
+        return HttpResponseRedirect(
+            reverse_lazy("project", args=[self.object.proj.pk])
+        )
 
 
 # редактируем спринт

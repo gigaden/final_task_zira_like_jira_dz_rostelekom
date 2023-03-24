@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&family=Roboto:wght@100&display=swap');
+* {
+    padding: 0px;
+    margin: 0px;
+
+}
+
+body {
+    font-family: "Comfortaa", "Arial", sans-serif;
+
+}
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    list-style-type: none;
+    background-color: aqua;
+
+}
+.navbar {
+    display:flex;
+    justify-content:left
+    flex-direction: row;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding-left: 2em;
+    padding-top: 1em;
+    }
+.navbar li {
+    padding-right: 1em;
+}
+.ul-auth li {
+    list-style-type: none;
+}
+
+.main-project-container {
+    border: 2px solid red;
+    padding-top: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+
+.project {
+    padding: 1em;
+    margin-left: auto;
+    margin-right: auto;
+    list-style-type: none;
+    border: 1px solid black;
+    width: auto;
+    max-width: 380px;
+    margin-bottom: 2em;
+
+}
+li {
+    margin-bottom: 0.8em;
+}
+
+.libutton {
+    margin-bottom: 1.3em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.button {
+    margin-right: 10px;
+    margin-top: 10px;
+    border: 1px solid blue;
+    border-radius: 10px;
+    padding: 0.5em;
+    width: 100px;
+    text-decoration: none;
+    background-color: yellow;
+}
+.button:hover {
+    background-color: aqua;
+}
+
+
+.main-task-container {
+    border: 2px solid red;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+.main-task-container ul {
+    border: 1px solid black;
+    list-style-type: none;
+    padding: 1em;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    width: 300px;
+}
+
+.sprints-container {
+    margin-left: 5%;
+    margin-right: 5%;
+    border: 2px solid red;
+    padding: 1em;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+}
+.sprints-container ul {
+    border: 1px solid black;
+    list-style-type: none;
+    padding: 1em;
+    margin-right: 2em;
+    margin-bottom: 2em;
+    width: 300px;
+}

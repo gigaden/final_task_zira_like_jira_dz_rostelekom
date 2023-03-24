@@ -6,10 +6,11 @@
     <a href="{% url 'task_create' %}">Создать новую задачу</a>
     <a href="{% url 'project_update' project.pk %}">редактировать проект</a>
     <a href="{% url 'project_delete' project.pk %}">удалить проект</a>
-    <a href="{% url 'sprint_create' %}">добавить спринт</a>
+    <a href="{% url 'sprint_create' projpk=project.pk %}">добавить спринт</a>
 
 {% if sprints %}
 <h3>Все спринты проекта. Всего: {{ sprints|length }}</h3>
+<div class="sprints-container">
 {% for sprint in sprints %}
     <ul>
         <li>Спринт: {{ sprint.name }}</li>
@@ -19,29 +20,32 @@
         {% else %}
         <li>Спринт завершён {{ sprint.complete_date }}</li>
         {% endif %}
-        <li><a href="/sprint/{{ sprint.pk }}">Все задачи спринта</a></li>
-        <li><a href="/sprint_delete/{{ sprint.pk }}">Удалить спринт</a></li>
-        <li><a href="{% url 'sprint_update' sprint.pk %}">Редактировать спринт</a></li>
+        <li class="libutton">
+            <a class="button" href="/sprint/{{ sprint.pk }}">все задачи</a>
+            <a class="button" href="/sprint_delete/{{ sprint.pk }}">удалить</a>
+            <a class="button" href="{% url 'sprint_update' sprint.pk %}">изменить</a>
+        </li>
     </ul>
 {% endfor %}
+</div>
 {% else %}
 <h3>Все спринты проекта</h3>
-<p>не создано ни одного спринта. <a href="{% url 'sprint_create' %}">Добавить?</a></p>
+<p>не создано ни одного спринта. <a href="{% url 'sprint_create' projpk=project.pk %}">Добавить?</a></p>
 {% endif %}
-<div class="main-task-container">
 {% if tasks %}
 <h3>Все задачи проекта. Всего: {{ tasks|length }}</h3>
+<div class="main-task-container">
 {% for task in tasks %}
 <ul>
-    <li>название задачи: {{ task.name }}</li>
-    <li>автор задачи: {{ task.author }}</li>
+    <li>название: {{ task.name }}</li>
+    <li>автор: {{ task.author }}</li>
     {% if task.worker == None %}
     <li>исполнитель не назначен</li>
     {% else %}
-    <li>назначена на: {{ task.worker }}</li>
+    <li>исполнитель: {{ task.worker }}</li>
     {% endif %}
     <li>описание задачи: {{ task.description }}</li>
-    <l>дата создания задачи: {{ task.create_date }}</l>
+    <l>создана: {{ task.create_date }}</l>
     {% if task.finish_date == None %}
     <li>закончить до: дата не определена</li>
     {% else %}
@@ -53,15 +57,17 @@
     <li>спринт: {{ task.spr }}</li>
     {% endif %}
     <li>статус задачи: {{ task.stat }}</li>
-    <li><a href="/update_task/{{ task.pk }}">Изменить задачу</a></li>
-    <li><a href="/move_task_forward/{{ task.pk }}">Следующий статус</a></li>
-    <li><a href="/move_task_back/{{ task.pk }}">Предыдущий статус</a></li>
-    <li><a href="{% url 'task_delete' task.pk%}">Удалить задачу</a></li>
+    <li class="libutton">
+        <a class="button" href="/update_task/{{ task.pk }}">изменить</a>
+        <a class="button" href="/move_task_forward/{{ task.pk }}">статус >></a>
+        <a class="button" href="/move_task_back/{{ task.pk }}"><< статус</a>
+        <a class="button" href="{% url 'task_delete' task.pk%}">удалить</a>
+    </li>
 </ul>
 {% endfor %}
+</div>
 {% else %}
 <h3>Все задачи проекта:</h3>
 <p>не создано ни одной задачи в проекте. <a href="{% url 'task_create' %}">Добавить?</a></p>
 {% endif %}
-</div>
 {% endblock content %}
