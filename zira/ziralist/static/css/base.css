@@ -39,13 +39,13 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: center;
 }
 
 .project {
     padding: 1em;
-    margin-left: auto;
     margin-right: auto;
+    margin-left: auto;
     list-style-type: none;
     border: 1px solid black;
     width: auto;
